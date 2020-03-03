@@ -1,8 +1,11 @@
 ﻿using CRMALL.Api.Helper;
 using CRMALL.Api.Injection;
 using CRMALL.Api.Mapper;
+using CRMALL.Teste.Domain.Configurations;
+using CRMALL.Teste.Repository.Context;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.PlatformAbstractions;
@@ -32,6 +35,10 @@ namespace CRMALL
             MapperConfig.RegisterMappings();
             services.AddMvc()
                 .AddJsonOptions(option => option.SerializerSettings.DateTimeZoneHandling = DateTimeZoneHandling.Utc);
+
+            services.Configure<Configuration>(Configuration.GetSection("Configuration"));
+            var connection = Configuration["Configuration:StringConnection"];
+            services.AddDbContext<DataContext>(o => o.UseMySql(connection));
 
             services.AddSwaggerGen(c =>
             {

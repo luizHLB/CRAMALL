@@ -10,11 +10,11 @@
                 return;
 
             _isMapped = true;
-            //AutoMapper.Mapper.Initialize(mapper =>
-            //{
-            //    mapper.AddProfile<MapperModel2Domain>();
-            //    mapper.AddProfile<MapperDomain2Model>();
-            //});
+            AutoMapper.Mapper.Initialize(mapper =>
+            {
+                mapper.AddProfile<MapperModel2Domain>();
+                mapper.AddProfile<MapperDomain2Model>();
+            });
         }
     }
 }

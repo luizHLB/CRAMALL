@@ -4,6 +4,8 @@ using CRMALL.Teste.Domain.Interfaces.Repository;
 using CRMALL.Teste.Domain.Interfaces.Service;
 using CRMALL.Teste.Domain.Models.Pessoa;
 using CRMALL.Teste.Domain.ViewModels.Cep;
+using CRMALL.Teste.Domain.ViewModels.Pessoa;
+using System.Collections.Generic;
 
 namespace CRMALL.Teste.Business.Service
 {
@@ -18,9 +20,14 @@ namespace CRMALL.Teste.Business.Service
             return CepHelper.ConsultarCep<CepViewModel>(cep);
         }
 
-        //public override IEnumerable<PessoaModel> All()
-        //{
-        //    return new List<PessoaModel> { new PessoaModel { Id = 1, DataNascimento = new DateTime(1991, 11, 8), Nome = "Luiz", Sexo = SexoEnum.Masculino } };
-        //}
+        public IEnumerable<PessoaViewModel> GetAll()
+        {
+            return ((IPessoaRepository)repository).GetAll();
+        }
+
+        public PessoaViewModel GetById(int id)
+        {
+            return ((IPessoaRepository)repository).GetById(id);
+        }
     }
 }

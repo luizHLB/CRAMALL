@@ -13,7 +13,7 @@ namespace CRMALL.Teste.Domain.Interfaces.Repository
         void Remove(int id);
         void Remove(int id, DbContext context);
         T Find(int id);
-        T Find(int id, DbContext context);
+        T Find(int id, DbContext context, bool extractFromContext = true);
         IEnumerable<T> All();
         DbContext GetContext();
     }

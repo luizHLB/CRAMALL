@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using CRMALL.Api.Controllers.Base;
+using CRMALL.Teste.Domain.Helper;
 using CRMALL.Teste.Domain.Interfaces.Service;
 using CRMALL.Teste.Domain.Models.Pessoa;
 using CRMALL.Teste.Domain.ViewModels.Pessoa;
@@ -29,13 +31,27 @@ namespace CRMALL.Controllers
         [HttpGet]
         public ActionResult GetAll()
         {
-            return Ok(service.All());
+            return Ok(service.GetAll());
         }
 
         [HttpGet("{id}")]
         public ActionResult GetById([FromRoute] int id)
         {
-            return Ok(service.Find(id));
+            return Ok(service.GetById(id));
+        }
+
+        [HttpPost]
+        public ActionResult Post([FromBody] PessoaInsertViewModel viewModel)
+        {
+            var model = MapperHelper.Map<PessoaInsertViewModel, PessoaModel>(viewModel);
+            return Ok(service.Create(model));
+        }
+
+        [HttpDelete("{id}")]
+        public ActionResult Delete(int id)
+        {
+            service.Remove(id);
+            return Ok();
         }
     }
 }

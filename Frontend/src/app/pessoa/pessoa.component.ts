@@ -74,7 +74,7 @@ export class PessoaComponent implements OnInit {
       this.pessoaForm.controls['Cep'].setValue(pessoa.cep);
       this.pessoaForm.controls['Cidade'].setValue(pessoa.cidade);
       this.pessoaForm.controls['Estado'].setValue(pessoa.estado);
-      this.pessoaForm.controls['Endereco'].setValue(pessoa.rua);
+      this.pessoaForm.controls['Rua'].setValue(pessoa.rua);
       this.pessoaForm.controls['Numero'].setValue(pessoa.numero);
       this.pessoaForm.controls['Complemento'].setValue(pessoa.complemento);
     });

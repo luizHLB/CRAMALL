@@ -12,6 +12,6 @@ namespace CRMALL.Teste.Domain.Models.Pessoa
         public SexoEnum Sexo { get; set; }
 
         public int EnderecoId { get; set; }
-        public EnderecoModel Endereco { get; set; }
+        public virtual EnderecoModel Endereco { get; set; }
     }
 }
