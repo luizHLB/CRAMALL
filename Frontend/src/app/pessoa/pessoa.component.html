@@ -1,0 +1,107 @@
+<div class="container"> 
+    <div >
+    <mat-card class="backgroundSombreado" >      
+      <mat-toolbar> 
+        <div > 
+          <b>CRMALL - Cadastro de Clientes</b>
+        </div>   
+      </mat-toolbar>    
+    <br><br> 
+      <mat-card-content> 
+        <form [formGroup]="pessoaForm"(ngSubmit)="onFormSubmit()"> 
+                <table> 
+                  <tr> 
+                    <td class="tbl4"> 
+                      <mat-form-field class="demo-full-width"> 
+                        <input formControlName="Nome" matTooltip="Informe o nome da Pessoa" matInput placeholder="Nome"> 
+                      </mat-form-field> 
+                      <mat-error> 
+                        <span *ngIf="!pessoaForm.get('Nome').value && pessoaForm.get('Nome').touched"></span> 
+                      </mat-error> 
+                    </td> 
+                    <td class="tbl4"> 
+                      <mat-form-field>
+                      <input formControlName="DataNascimento" matInput [matDatepicker]="DataNascimento" matTooltip="Informe a Data de Nascimento" placeholder="Data de Nascimento">
+                      <mat-datepicker-toggle matSuffix [for]="DataNascimento"></mat-datepicker-toggle>
+                      <mat-datepicker #DataNascimento></mat-datepicker>
+                    </mat-form-field>
+                    </td> 
+                    <td>
+                      <mat-form-field>
+                        <mat-label>Sexo</mat-label>
+                        <mat-select [(value)]="pessoaForm.Sexo" formControlName="Sexo">
+                          <mat-option>Não selecionado</mat-option>
+                          <mat-option value="1">Masculino</mat-option>
+                          <mat-option value="2">Feminino</mat-option>
+                          <mat-option value="3">Outros</mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </td>
+                  </tr> 
+                  <tr>
+                    <td class="tbl4">
+                      <mat-form-field class="demo-full-width"> 
+                        <input formControlName="Cep" matTooltip="Informe o CEP" matInput placeholder="CEP" [textMask]="{mask: cepMask}" (blur)="consultarCep(pessoaForm.get('Cep').value)"> 
+                      </mat-form-field> 
+                    </td>
+                    <td class="tbl4">
+                      <mat-form-field class="demo-full-width"> 
+                        <input formControlName="Estado" matTooltip="Informe o Estado" matInput placeholder="Estado"> 
+                      </mat-form-field> 
+                    </td>
+                    <td class="tbl4">
+                      <mat-form-field class="demo-full-width"> 
+                        <input formControlName="Cidade" matTooltip="Informe a Cidade" matInput placeholder="Cidade"> 
+                      </mat-form-field> 
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="tbl4">
+                      <mat-form-field class="demo-full-width"> 
+                        <input formControlName="Rua" matTooltip="Informe o Endereço" matInput placeholder="Endereço"> 
+                      </mat-form-field> 
+                    </td>
+                    <td class="tbl4">
+                      <mat-form-field class="demo-full-width"> 
+                        <input formControlName="Numero" matTooltip="Informe o Número" matInput placeholder="Número"> 
+                      </mat-form-field> 
+                    </td>
+                    <td class="tbl4">
+                      <mat-form-field class="demo-full-width"> 
+                        <input formControlName="Complemento" matTooltip="Informe a Complemento" matInput placeholder="Complemento"> 
+                      </mat-form-field> 
+                    </td>
+                  </tr>
+                  <tr> 
+                    <td></td> 
+                    <td></td> 
+                    <td  class="content-center"> 
+                      <button type="submit" mat-raised-button color="accent"matTooltip="Clique no botão Enviar"[disabled]="!pessoaForm.valid">Enviar</button>     
+                      <button type="reset" mat-raised-button color="accent"matTooltip="Clique no botão Resetar" (click)="resetForm()">Resetar</button> 
+                    </td> 
+                    <td> 
+                      <p *ngIf="dataSaved" style="color:rgb(55, 0, 128);font-size:20px;font-weight:bold" Class="success" align="left"> 
+                        {{message}} 
+                      </p> 
+                    </td> 
+                  </tr> 
+                </table> 
+           <br><br> 
+          <table> 
+              <tr ngclass="btn-primary"> 
+                <th class="tbl8">Nome</th> 
+                <th class="tbl2">Ações</th> 
+              </tr> 
+              <tr *ngFor="let pessoa of allPessoas | async"> 
+                <td class="tbl8">{{pessoa.nome}}</td> 
+                <td class="tbl1"> 
+                  <button type="button" mat-raised-button color="accent" matTooltip="Clique no botão para Editar"(click)="loadPessoa(pessoa.id)">Editar</button> 
+                  <button type="button" mat-raised-button color="accent" matTooltip="Clique no botão para Deletar"(click)="deletePessoa(pessoa.id)">Excluir</button> 
+                </td> 
+              </tr>    
+            </table> 
+        </form> 
+      </mat-card-content> 
+    </mat-card> 
+  </div>
+    </div>
